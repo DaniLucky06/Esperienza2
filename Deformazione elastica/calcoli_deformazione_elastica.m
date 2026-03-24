@@ -9,9 +9,9 @@ clc
 % --- ANALISI DATI --- %
 
 % Eseguo il file startup.m, contiene variabili generalmente utili
-run('/Users/giacomovanzelli/MATLAB/startup.m');
+run('startup.m');
 
-dati = readtable('/Users/giacomovanzelli/MATLAB/Deformazione elastica/dati_deformazione_elastica.csv');
+dati = readtable('dati_deformazione_elastica.csv');
 massa_molla = 21.1;
 
 % Risoluzioni
