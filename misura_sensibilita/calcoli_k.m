@@ -20,3 +20,5 @@ hold on; grid on;
 plot(H_space, q + k .* H_space, 'r', 'LineWidth', 1);
 plot(H, P, 'kx', 'MarkerSize', 15, 'LineWidth', 2);
 hold off;
+
+% modifica a cazzo
