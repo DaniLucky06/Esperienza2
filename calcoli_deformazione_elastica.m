@@ -17,6 +17,9 @@ voltagi = dati_1(:,2);
 indeterminazione = dati_1(:,3);
 altezza = dati_1(:,4) ./ 100;
 
+peso_molla1 = .199;
+peso_molla2 = .205;
+
 err_v = indeterminazione;
 err_l = .0005 / sqrt(12);
 err_m = .001 / sqrt(12);
