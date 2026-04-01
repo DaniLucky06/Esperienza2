@@ -6,7 +6,6 @@ dati = dati(2:end, :); % scartare il primo (regime non lineare?)
 
 m_molla1 = .0199; % senza anelli
 m_molla2 = .0205; % con anelli
-g = 9.80655;
 
 m = dati(:,1) ./ 1000;
 m = m + m_molla2 ./ 2; % non cambia il calcolo di k, ma di a sì
@@ -52,6 +51,7 @@ k = 1 / b;
 
 a_k_err = y_err_i * sqrt(S_XX / D_k);
 b_k_err = b_err; % errore finale
+k_err = 1 / b^2 * b_err;
 
 y_k_err = sqrt(y_err .^ 2 + (b_k .* x_err) .^ 2); % errore finale contando la x
 
@@ -81,7 +81,7 @@ b = (1 / D_W) * (S_W * S_XYW - S_XW * S_YW);
 
 % migliorare
 y_err_i = sqrt(y_err .^ 2 + (b .* x_err) .^ 2); % errore 2
-b_err = 1 / D_W * sum(y_err_i .^ 2); % errore aggiornato
+b_err = sqrt(S_W / D_W); % errore aggiornato
 b1 = b + 2 * b_err;
 
 while abs(b - b1) > b_err % loop di miglioramento (per k non parte nemmeno)
@@ -110,6 +110,7 @@ S = 1 / b; % Fattore di conversione: N/V, V-->N
 
 a_V_err = sqrt(S_XXW / D_W);
 b_V_err = sqrt(S_W / D_W); % errore finale
+S_err = 1 / b^2 * b_V_err;
 
 chi2_V = sum(((V - (a_V + b_V.*P)) ./ y_err_i).^2);
 chi2_V_rid = chi2_V / (N - 2);
