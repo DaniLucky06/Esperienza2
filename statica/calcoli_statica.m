@@ -101,7 +101,6 @@ while abs(b - b1) > b_err % loop di miglioramento (per k non parte nemmeno)
     b_err = sqrt(S_W / D_W);
     b1 = b;
     b = (1 / D_W) * (S_W * S_XYW - S_XW * S_YW);
-    disp(1);
 end
 
 a_V = (1 / D_W) * (S_XXW * S_YW - S_XW * S_XYW);

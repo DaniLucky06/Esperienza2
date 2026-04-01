@@ -20,9 +20,17 @@ y_space = linspace(0, .1, 10);
     plot(x, y, 'kx', 'MarkerSize', marker_size, 'LineWidth', marker_line_width);
     errorbar(x, y, y_err_chi2, y_err_chi2)
     
-    xlabel("Peso [N]");
-    ylabel("\Deltay [m]");
+    xlabel("Massa [kg]");
+    ylabel("T^2 [s]");
     title("Fit");
     legend(p, 'T^2 = a + b\cdotm', 'Fontsize', legend_size);
 
+    hold off;
+
+% - Grafico errori - %
+    figure;
+    hold on; grid on;
+    errorbar(x, y - (a + b .* x), y_err_chi2, 'k+');
+    errorbar(x, y - (a + b .* x), y_err_i, 'kx');
+    plot(x, zeros(length(x)), 'r')
     hold off;
