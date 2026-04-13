@@ -27,6 +27,7 @@ h_ris = 0.0005;
 m_err = m_ris / sqrt(12);
 P_err = m_err .* g; % scalare
 h_err = h_ris / sqrt(12); % scalare
+h_err = h_err * sqrt(2);
 
 h = h - h_0;
 k_i = (P - P_0) ./ h;
