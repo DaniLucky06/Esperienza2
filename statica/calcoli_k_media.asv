@@ -1,0 +1,45 @@
+% LUNGHEZZE IN METRI
+% PESO IN KILOGRAMMI
+% TENSIONE IN VOLT
+
+clc
+
+dati = readmatrix('dati_statica.csv');
+dati = dati(1:end, :); % scartare il primo (regime non lineare?)
+
+m_molla1 = .0199; % senza anelli
+m_molla2 = .0205; % con anelli
+
+m = dati(:,1) ./ 1000;
+m = m + m_molla2 ./ 2; % non cambia il calcolo di k, ma di a sì
+P = m(2:end) .* g;
+P_0 = m(1) .* g;
+V = dati(:,2);
+h = -dati(2:end, 4) ./ 100;
+h_0 = -dati(1,4) ./ 100;
+N = size(h, 1);
+
+% Risoluzioni
+m_ris = 0.0001;
+h_ris = 0.0005;
+
+% Incertezze/errori/sigmae
+m_err = m_ris / sqrt(12);
+P_err = m_err .* g; % scalare
+h_err = h_ris / sqrt(12); % scalare
+
+h = h - h_0;
+k_i = (P - P_0) ./ h;
+k_err_i = k_i .* sqrt((P_err ./ (P - P_0)).^2 + (P_err ./ (P - P_0)).^2 + (h_err ./ h).^2);
+
+w_i = 1 ./ k_err_i.^2;
+S_w = sum(w_i);
+S_k_w = sum(k_i .* w_i);
+k_err = 1 ./ sqrt(S_w);
+
+k = S_k_w ./ S_w;
+
+k_med = mean(k_i);
+k_err_med = std(k_i);
+
+chi2 = sum(((k_i - k_med) ./ k_err_med).^2)
