@@ -2,7 +2,7 @@
 % PESO IN KILOGRAMMI
 % TENSIONE IN VOLT
 dati = readmatrix('dati_statica.csv');
-dati = dati(2:end, :); % scartare il primo (regime non lineare?)
+dati = dati(1:end, :); % scartare il primo (regime non lineare?)
 
 m_molla1 = .0199; % senza anelli
 m_molla2 = .0205; % con anelli
