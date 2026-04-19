@@ -2,13 +2,13 @@
 % PESO IN KILOGRAMMI
 % TENSIONE IN VOLT
 dati = readmatrix('dati_statica.csv');
-dati = dati(1:end, :); % scartare il primo (regime non lineare?)
+dati = dati(1:end, :);
 
 m_molla1 = .0199; % senza anelli
 m_molla2 = .0205; % con anelli
+P_molla = m_molla1 * g;
 
 m = dati(:,1) ./ 1000;
-m = m + m_molla2 ./ 2; % non cambia il calcolo di k, ma di a sì
 P = m .* g;
 V = dati(:,2);
 h = -dati(:, 4) ./ 100;

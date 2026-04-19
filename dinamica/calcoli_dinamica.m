@@ -76,13 +76,29 @@ k_din = C^2 / b;
 me_din = a * k_din / C^2;
 
 % Errori sui parametri
-C_stat_err = sqrt((k / (2*sqrt(b * k)) * b_err)^2 + (b / (2*sqrt(b * k)) * k_err)^2); % DA RICONTROLLARE
-me_stat_err = sqrt((a_err / b)^2 + (a / b^2 * b_err)^2); % DA RICONTROLLARE
+C_stat_err = sqrt( ...
+    (k / (2*sqrt(b * k)) * b_err)^2 + ...
+    (b / (2*sqrt(b * k)) * k_err)^2 ...
+    ); % DA RICONTROLLARE
+me_stat_err = sqrt( ...
+    (a_err / b)^2 + ...
+    (a / b^2 * b_err)^2 ...
+    ); % DA RICONTROLLARE
 k_din_err = C^2 / b^2 * b_err; % DA RICONTROLLARE
-me_din_err = sqrt((k_din / C^2 * a_err)^2 + (a / C^2 * k_din_err)^2); % DA RICONTROLLARE
+me_din_err = sqrt( ...
+    (k_din / C^2 * a_err)^2 + ...
+    (a / C^2 * k_din_err)^2 ...
+    ); % DA RICONTROLLARE
 
 chi2 = sum(((y - (a + b.*x)) ./ y_err_i).^2);
 chi2_rid = chi2 / (N - 2);
 
 % Stimare l'errore medio a partire dal chi quadro
 y_err_chi2 = sqrt(sum((y - (a + b.*x)).^2) / (N-2));
+
+% Stimare l'errore sulle frequenze iniziali dato l'errore sul k per fare
+% coincidere i k dinamico e statico
+
+k_err_cercato = sqrt((k_din - k)^2 - k_err^2);
+f = mean(f_mat, 1);
+f_err_stimato = sqrt(k_err_cercato.^2 - (4 .* pi^2 .* f.^2 .* m_err).^2) ./ (8 .* pi.^2 .* m .* f);
