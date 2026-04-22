@@ -102,3 +102,5 @@ y_err_chi2 = sqrt(sum((y - (a + b.*x)).^2) / (N-2));
 k_err_cercato = sqrt((k_din - k)^2 - k_err^2);
 f = mean(f_mat, 1);
 f_err_stimato = sqrt(k_err_cercato.^2 - (4 .* pi^2 .* f.^2 .* m_err).^2) ./ (8 .* pi.^2 .* m .* f);
+
+display(f')

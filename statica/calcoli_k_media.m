@@ -55,8 +55,9 @@ k_med_graph = yline(k_med, 'g', LineWidth=2.5); % media semplice
 errorbar(P, k_i, k_err_i, 'xb', LineWidth=2, MarkerSize=10);
 
 labelsize = 40;
-ylabel('k [N/m]', FontSize=labelsize);
-xlabel('P [N]', FontSize=labelsize);
+xlabel('P [N]', FontSize=labelsize, Interpreter='latex');
+ylabel('k [N/m]', FontSize=labelsize, Interpreter='latex');
+
 
 legend( ...
     [k_graph, k_med_graph], ...

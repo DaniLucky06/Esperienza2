@@ -21,7 +21,7 @@ y_space = linspace(0, .1, 10);
     errorbar(x, y, y_err_chi2, y_err_chi2)
     
     xlabel("Massa [kg]");
-    ylabel("T^2 [s]");
+    ylabel("T^2 [s^2]");
     title("Fit");
     legend(p, 'T^2 = a + b\cdotm', 'Fontsize', legend_size);
 
@@ -30,7 +30,19 @@ y_space = linspace(0, .1, 10);
 % - Grafico errori - %
     figure;
     hold on; grid on;
-    errorbar(x, y - (a + b .* x), y_err_chi2, 'k+');
-    errorbar(x, y - (a + b .* x), y_err_i, 'kx');
-    plot(x, zeros(length(x)), 'r')
+    err_bar_chi2 = errorbar(x, y - (a + b .* x), y_err_chi2, 'gx', Marker='none', LineWidth=1);
+    err_bar = errorbar(x, y - (a + b .* x), y_err_i, 'bx', MarkerSize=10, LineWidth=2);
+    yline(0, 'r', LineWidth=2)
+
+    set(gca, "FontSize", 25);
+    legend( ...
+        [err_bar(1), err_bar_chi2(1)], ...
+        {'Errori base', 'Errori per chi corretto'}, ...
+        Location="northeast", ...
+        FontSize=30 ...
+    );
+
+    ax_font = 40;
+    xlabel('Massa [kg]', 'FontSize', ax_font, 'Interpreter', 'latex');
+    ylabel('$(T^2 - \bar{T}^2 )\, [s^2]$', 'FontSize', ax_font, 'Interpreter', 'latex');
     hold off;
