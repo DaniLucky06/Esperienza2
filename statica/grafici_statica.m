@@ -10,7 +10,7 @@ plots_line_width = 1;
 % --- GRAFICI K --- %
 P_space = linspace(0, 2.5, 10);
 y_space = linspace(0, .1, 10);
-% - Grafico dx-mg - %
+% - Grafico dx-mg - % 
     figure;
     hold on; grid on;
 
@@ -31,6 +31,39 @@ y_space = linspace(0, .1, 10);
     
     p = plot(y_space, k .* y_space, 'r', 'LineWidth', plots_line_width);
     plot(h - a_k, P, 'kx', 'MarkerSize', marker_size, 'LineWidth', marker_line_width);
+    % errorbar(h - a, P, 0, 0, y_k_err, y_k_err)
+    
+    xlabel("\Deltay [m]");
+    ylabel("Peso [N]");
+    title("Fit k2");
+    legend(p, 'mg = k\cdot\Deltay', 'Fontsize', legend_size);
+
+    hold off;
+
+
+
+ % - Grafico h-mg - %
+    figure;
+    hold on; grid on;
+
+    p = plot(P_space, a_k + b_k .* P_space, 'r', 'LineWidth', plots_line_width);
+    plot(P, h, 'kx', 'MarkerSize', marker_size, 'LineWidth', marker_line_width);
+    % errorbar(P, h - a, y_k_err, y_k_err)
+    
+    xlabel("Peso [N]");
+    ylabel("\Deltay [m]");
+    title("Fit k1");
+    legend(p, '\Deltay = 1/k\cdotmg', 'Fontsize', legend_size);
+
+    hold off;
+
+    h_space = linspace(-0.2, -0.1, 10);
+% - Grafico mg-h - %
+    figure;
+    hold on; grid on;
+    
+    p = plot(h_space, k .* (h_space - a_k), 'r', 'LineWidth', plots_line_width);
+    plot(h, P, 'kx', 'MarkerSize', marker_size, 'LineWidth', marker_line_width);
     % errorbar(h - a, P, 0, 0, y_k_err, y_k_err)
     
     xlabel("\Deltay [m]");
